@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: web-gateway
+  datasource:
+    url: jdbc:h2:mem:web-gateway
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  cloud:
+    gateway:
+      routes:
+        - id: aggr_route
+          uri: ${service.aggr.api.url}
+          predicates:
+            - Path=${service.aggr.api.routes}
+          filters:
+            - RewritePath=/api/v1, /api/v1/ext
+server:
+  port: 8185
+service:
+  aggr:
+    api:
+      url: http://localhost:8085
+      routes: |
+        /api/v1/patient-details/**

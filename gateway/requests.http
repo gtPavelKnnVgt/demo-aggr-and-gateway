@@ -1,0 +1,4 @@
+### GET request to example server
+GET http://localhost:8185/api/v1/patient-details/aggregate/1
+
+###
